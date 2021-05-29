@@ -5,8 +5,11 @@
 #' @param save Si save = TRUE, es guarda el fitxer i es retorna el path del fitxer
 #' @return Si save = TRUE, retorna el path de la imatge guardada. Si no, nomes es visualitza el grafic en R studio
 #' @examples
-#' plot_vacunats("BAIX LLOBREGAT")
-#' plotfile <- plot_vacunats("BAIX LLOBREGAT", save = TRUE)
+#' \dontshow{
+#' bllobregatdata <- download_data("BAIX LLOBREGAT")
+#' }
+#' plot_data(bllobregatdata)
+#' plotfile <- plot_data(bllobregatdata, save = TRUE)
 #' @import ggplot2
 #' @export
 
@@ -14,7 +17,8 @@
 plot_data <- function(dataframe, save = FALSE) {
 	Sys.setlocale("LC_TIME", "catalan")
   options(scipen=999)
-	
+  DATA <- VACUNATS_DOSI_1 <- NULL
+
   comarcadiarigen <- dataframe
   comarca <- as.character(comarcadiarigen[1, "NOM"])
 
@@ -31,15 +35,15 @@ plot_data <- function(dataframe, save = FALSE) {
 	vacunats1sum <- lapply(vacunats1, sum)
 	#crear dataframe amb les dades
 	vacunats1data <- data.frame(DATA=as.Date(names(vacunats1sum)), VACUNATS_DOSI_1=unlist(vacunats1sum))
-	#obtenir la suma acumulada 
+	#obtenir la suma acumulada
 	vacunats1data$VACUNATS_DOSI_1 <- cumsum(vacunats1data$VACUNATS_DOSI_1)
 
 	#crear el grafic
-	plot <- ggplot(vacunats1data, aes(x=DATA, y=VACUNATS_DOSI_1)) + geom_line(color="red") 
+	plot <- ggplot(vacunats1data, aes(x=DATA, y=VACUNATS_DOSI_1)) + geom_line(color="red")
 	title <- paste("Persones vacunades amb la 1a dosi al 2021", comarca, sep = "\n")
 	plot = plot + labs(title =  title, x= "Mesos", y= "Persones vacunades")
 	plot = plot + theme(plot.title = element_text(hjust = 0.5))
-	
+
 	print(plot)
 
 	#guardar el grafic
@@ -48,5 +52,5 @@ plot_data <- function(dataframe, save = FALSE) {
 		ggsave(filepath, plot=plot, height = 3, width = 6)
 		return(filepath)
 	}
-	
+
 }

@@ -18,6 +18,9 @@ Si save = TRUE, retorna el path de la imatge guardada. Si no, nomes es visualitz
 Crea un gràfic amb la quantitat acumulada de vacunats al llarg del 2021
 }
 \examples{
-plot_vacunats("BAIX LLOBREGAT")
-plotfile <- plot_vacunats("BAIX LLOBREGAT", save = TRUE)
+\dontshow{
+bllobregatdata <- download_data("BAIX LLOBREGAT")
+}
+plot_data(bllobregatdata)
+plotfile <- plot_data(bllobregatdata, save = TRUE)
 }

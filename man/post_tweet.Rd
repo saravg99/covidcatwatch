@@ -19,7 +19,9 @@ El nom del fitxer per defecte es "accesskeys.json"}
 Publica un tweet
 }
 \examples{
+\dontrun{
 post_tweet("Hello")
 post_tweet("Hello", image = "image.png")
 post_tweet("Hello", keysfile = "keys.json")
+}
 }

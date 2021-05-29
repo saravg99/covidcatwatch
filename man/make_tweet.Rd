@@ -10,7 +10,7 @@ make_tweet(dataframe)
 \item{dataframe}{dataframe amb les dades covid de la comarca corresponent}
 }
 \value{
-casos confirmats, incidencia acumulada
+casos confirmats, defuncions, incidencia acumulada
 per 100.000 habitants en els ultims 7 i 14 dies i el total
 acumulat de persones vacunades
 }
@@ -18,5 +18,8 @@ acumulat de persones vacunades
 Crea un tweet amb les dades diaries de la comarca
 }
 \examples{
+\dontshow{
+bllobregatdata <- download_data("BAIX LLOBREGAT")
+}
 tweet <- make_tweet(bllobregatdata)
 }

@@ -2,14 +2,16 @@
 #'
 #' Publica un tweet
 #' @param tweet text que publicar
-#' @param keysfile Fitxer JSON que contingui les variables: 
-#' consumerKey, consumerSecret, accessToken, accessTokenSecret. 
+#' @param keysfile Fitxer JSON que contingui les variables:
+#' consumerKey, consumerSecret, accessToken, accessTokenSecret.
 #' El nom del fitxer per defecte es "accesskeys.json"
 #' @param image fitxer de la imatge que es vol incloure
 #' @examples
+#' \dontrun{
 #' post_tweet("Hello")
 #' post_tweet("Hello", image = "image.png")
 #' post_tweet("Hello", keysfile = "keys.json")
+#' }
 #' @importFrom jsonlite fromJSON
 #' @import twitteR
 #' @export

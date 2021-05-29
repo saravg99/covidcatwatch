@@ -2,20 +2,23 @@
 #'
 #' Crea un tweet amb les dades diaries de la comarca
 #' @param dataframe dataframe amb les dades covid de la comarca corresponent
-#' @return casos confirmats, incidencia acumulada 
-#' per 100.000 habitants en els ultims 7 i 14 dies i el total  
+#' @return casos confirmats, defuncions, incidencia acumulada
+#' per 100.000 habitants en els ultims 7 i 14 dies i el total
 #' acumulat de persones vacunades
 #' @examples
+#' \dontshow{
+#' bllobregatdata <- download_data("BAIX LLOBREGAT")
+#' }
 #' tweet <- make_tweet(bllobregatdata)
 #' @export
 
 
 make_tweet <- function(dataframe) {
 	comarcadiarigen <- dataframe
-	
+
 	comarca <- as.character(comarcadiarigen[1, "NOM"])
-	
-	poblacio_cat <- read.csv(system.file("extdata", "poblacio_cat.csv", package = "dadescovidcomarques"), sep = ";")
+
+	poblacio_cat <- read.csv(system.file("extdata", "poblacio_cat.csv", package = "covidcatwatch"), sep = ";")
 	comarca_mask <- poblacio_cat$comarca == comarca
 	poblacio <- poblacio_cat[comarca_mask, "poblacio"]
 
@@ -32,6 +35,8 @@ make_tweet <- function(dataframe) {
 
 	##EXTRAURE VALORS
 	casostotals <- sum(comarcagendia$CASOS_CONFIRMAT)
+
+	exitustotals <- sum(comarcagendia$EXITUS)
 
 	#IA7
 	last7mask <- dates >= (lastdate - 6) & dates <= lastdate
@@ -55,6 +60,7 @@ make_tweet <- function(dataframe) {
 	##crear el tweet
 	lastdate <- format(lastdate, "%d/%m/%Y")
 	casos <- paste("Casos confirmats:", casostotals)
+	exitus <- paste("Defuncions:", exitustotals)
 	incidencia7 <- paste("  - 7 dies:", ia7)
 	incidencia14 <- paste("  - 14 dies:", ia14)
 	incidencia <- "Incidencia acumulada per 100000 habitants:"
