@@ -67,7 +67,7 @@ make_tweet <- function(dataframe) {
 	dosi1 <- paste("Vacunats 1a dosi:", dosi1total, paste0("(", dosi1percent, "%)"))
 	dosi2 <- paste("Vacunats 2a dosi:", dosi2total, paste0("(", dosi2percent, "%)"))
 
-	tweet <- paste(lastdate, casos, incidencia, incidencia7, incidencia14, dosi1, dosi2, sep = "\n")
+	tweet <- paste(lastdate, casos, exitus, incidencia, incidencia7, incidencia14, dosi1, dosi2, sep = "\n")
 	cat(tweet)
 	return(tweet)
 }
