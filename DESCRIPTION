@@ -1,6 +1,6 @@
 Package: covidcatwatch
 Title: Twitterbot dades covid catalunya
-Version: 0.0.0.9000
+Version: 0.99.0
 Authors@R: 
     person(given = "Sara",
            family = "Vega",
@@ -10,6 +10,8 @@ Description: Permet crear un twitterbot que publiqui diariament les dades covid 
 License: GPL (>= 3)
 Encoding: UTF-8
 Imports: jsonlite, twitteR, ggplot2
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
