@@ -10,7 +10,7 @@ download_data(comarca)
 \item{comarca}{Nom de la comarca en majuscules}
 }
 \value{
-Dataframe amb les dades de la poblaci?general de la comarca corresponent
+Dataframe amb les dades de la poblacio general de la comarca corresponent
 }
 \description{
 Descarrega les dades més recents i crea un dataframe amb les dades de la població general de la comarca
