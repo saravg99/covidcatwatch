@@ -1,6 +1,6 @@
 Package: covidcatwatch
 Title: Twitterbot dades covid catalunya
-Version: 0.99.0
+Version: 0.99.1
 Authors@R: 
     person(given = "Sara",
            family = "Vega",
@@ -12,6 +12,5 @@ Encoding: UTF-8
 Imports: jsonlite, twitteR, ggplot2
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001

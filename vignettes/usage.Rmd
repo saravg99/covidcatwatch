@@ -1,5 +1,5 @@
 ---
-title: "Usage of the package covidcatwatch"
+title: "Ús del paquet covidcatwatch"
 author: "Sara Vega Abellaneda"
 date: "1/6/2021"
 output: rmarkdown::html_vignette
@@ -14,31 +14,30 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-### Installing the package
+### Instal·lació del paquet
 
-To install the package:
+Per instalar el paquet:
 ```{r eval=FALSE}
 install.packages("remotes")
 library(remotes)
 install_github("saravg/covidcatwatch")
 ```
 
-Once covidcatwatch is installed, it can be loaded as following:
+Una vegada el paquet covidcatwatch està instal·lat, es pot carregar de la següent manera: 
 
 ```{r}
 library(covidcatwatch)
 ```
 
-### Usage example
-
-The first step is downloading the data of the region we are interested in (in this example: Baix Llobregat) and storing it into a dataset. It can be done with the function `download_data()`.
+### Exemple d'ús
+El primer pas es descarregar les dades de la comarca d'interès (en aquest exemple: Baix Llobregat) i emmagatzemarles en un *dataset*. Això es pot fer amb la funció `download_data()`.
 
 ```{r}
 bllobregatdata <- download_data("BAIX LLOBREGAT")
 
 ```
 
-Once the data is obtained, it can be used to create a a summary of the current day by using `make_tweet`.
+Una vegada s'han obtingut les dades, es poden fer servir per crear un resum diari mitjançant la funció `make_tweet`.
 
 ```{r}
 tweet <- make_tweet(bllobregatdata)
@@ -46,7 +45,7 @@ tweet <- make_tweet(bllobregatdata)
 ```
 
 
-An optional step is making a plot with this data using the function `plot_data` and store the path of the image in an object.  
+Un pas opcional és crear un gràfic amb aquestes dades amb la funció `plot_data` i emmagatzemar el *path* de la imatge en una variable. 
 
 ```{r fig.height = 3, fig.width = 6}
 plotfile <- plot_data(bllobregatdata, save = TRUE)
@@ -54,7 +53,7 @@ plotfile <- plot_data(bllobregatdata, save = TRUE)
 ```
 
 
-Finally, the summary and the plot can be posted as a tweet using the function `post_tweet`. In order to make this function work, the Twitter API keys and tokens must be stored in a JSON file as following: 
+Finalment, el resum i el gràfic es poden publicar en forma de tweet amb la funció `post_tweet`. Per a que això funcioni correctament, s'han d'emmagatzemar les claus de l'API de Twitter en un fitxer JSON de la següent manera:
 
 
 ```{json}
@@ -66,7 +65,7 @@ Finally, the summary and the plot can be posted as a tweet using the function `p
 }
 ```
 
-Once this file is created, the function `post_tweet` can be used.
+Una vegada s'ha cerat aquest fitxer ja es pot utilitzar la funció `post_tweet`. 
 
 
 ```{r eval=FALSE}
