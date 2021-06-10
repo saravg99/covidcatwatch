@@ -2,31 +2,24 @@
 #'
 #' Publica un tweet
 #' @param tweet text que publicar
-#' @param keysfile Fitxer JSON que contingui les variables:
-#' consumerKey, consumerSecret, accessToken, accessTokenSecret.
-#' El nom del fitxer per defecte es "accesskeys.json"
 #' @param image fitxer de la imatge que es vol incloure
 #' @examples
 #' \dontrun{
 #' post_tweet("Hello")
 #' post_tweet("Hello", image = "image.png")
-#' post_tweet("Hello", keysfile = "keys.json")
 #' }
 #' @importFrom jsonlite fromJSON
 #' @import twitteR
 #' @export
 
-post_tweet <- function(tweet,  keysfile = "accesskeys.json", image = NULL) {
-
-	##App values
-
-keys <- jsonlite::fromJSON(keysfile)
+post_tweet <- function(tweet, image = NULL) {
 
 
-#Connect to twitter
-twitteR::setup_twitter_oauth(keys$consumerKey,keys$consumerSecret,keys$accessToken,keys$accessTokenSecret)
+  #Connect to twitter
 
-#Post Tweet
-twitteR::updateStatus(tweet, mediaPath=image, bypassCharLimit=TRUE)
+  twitteR::setup_twitter_oauth(Sys.getenv("consumerKey"), Sys.getenv("consumerSecret"), Sys.getenv("accessToken"), Sys.getenv("accessTokenSecret"))
+
+  #Post Tweet
+  twitteR::updateStatus(tweet, mediaPath=image, bypassCharLimit=TRUE)
 
 }
