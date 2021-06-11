@@ -15,7 +15,7 @@
 
 
 plot_data <- function(dataframe, save = FALSE) {
-	Sys.setlocale("LC_TIME", "catalan")
+	Sys.setlocale("LC_TIME", "ca_ES")
   options(scipen=999)
   DATA <- VACUNATS_DOSI_1 <- NULL
 
