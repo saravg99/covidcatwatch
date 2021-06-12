@@ -15,7 +15,8 @@
 
 
 plot_data <- function(dataframe, save = FALSE) {
-	Sys.setlocale("LC_TIME", "ca_ES")
+  months <- c("Gen.", "Febr.", "Març", "Abr.", "Maig", "Juny", "Jul.", "Agost", "Sept.", "Oct.", "Nov.", "Dec.")
+
   options(scipen=999)
   DATA <- VACUNATS_DOSI_1 <- NULL
 
@@ -43,6 +44,7 @@ plot_data <- function(dataframe, save = FALSE) {
 	title <- paste("Persones vacunades amb la 1a dosi al 2021", comarca, sep = "\n")
 	plot = plot + labs(title =  title, x= "Mesos", y= "Persones vacunades")
 	plot = plot + theme(plot.title = element_text(hjust = 0.5))
+	plot = plot + scale_x_date(labels = function(x) months[as.numeric(substr(x, 6, 7))])
 
 	print(plot)
 
