@@ -8,7 +8,6 @@
 #' post_tweet("Hello")
 #' post_tweet("Hello", image = "image.png")
 #' }
-#' @importFrom jsonlite fromJSON
 #' @import twitteR
 #' @export
 
