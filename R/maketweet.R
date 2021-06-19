@@ -66,8 +66,12 @@ make_tweet <- function(dataframe) {
 	incidencia <- "Incidencia acumulada per 100000 habitants:"
 	dosi1 <- paste("Vacunats 1a dosi:", dosi1total, paste0("(", dosi1percent, "%)"))
 	dosi2 <- paste("Vacunats 2a dosi:", dosi2total, paste0("(", dosi2percent, "%)"))
+	hashtag_comarques <- read.csv(system.file("extdata", "hashtag_comarques.csv", package = "covidcatwatch"), sep = ";")
+	hashtag_comarca <- hashtag_comarques[comarca_mask, "hashtag"]
 
-	tweet <- paste(lastdate, casos, exitus, incidencia, incidencia7, incidencia14, dosi1, dosi2, sep = "\n")
+	hashtags <- paste(hashtag_comarca, "#covid19", "#catalunya", "#incidencia", "#vacunats")
+
+	tweet <- paste(lastdate, casos, exitus, incidencia, incidencia7, incidencia14, dosi1, dosi2, hashtags, sep = "\n")
 	cat(tweet)
 	return(tweet)
 }
