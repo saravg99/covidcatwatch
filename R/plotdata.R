@@ -30,22 +30,64 @@ plot_data <- function(dataframe, save = FALSE) {
 	year_mask <- years == "2021"
 	comarcagen2021 <- comarcadiarigen[year_mask, ]
 
+	##VACUNATS
 	#obtenir dades de persones vacunades agrupat per data
 	vacunats1 <- split(comarcagen2021$VACUNATS_DOSI_1, droplevels(comarcagen2021$DATA))
 	#sumar les dades de cada dia
 	vacunats1sum <- lapply(vacunats1, sum)
 	#crear dataframe amb les dades
-	vacunats1data <- data.frame(DATA=as.Date(names(vacunats1sum)), VACUNATS_DOSI_1=unlist(vacunats1sum))
+	plotdata <- data.frame(DATA=as.Date(names(vacunats1sum)), VACUNATS_DOSI_1=unlist(vacunats1sum))
 	#obtenir la suma acumulada
-	vacunats1data$VACUNATS_DOSI_1 <- cumsum(vacunats1data$VACUNATS_DOSI_1)
+	plotdata$VACUNATS_DOSI_1 <- cumsum(plotdata$VACUNATS_DOSI_1)
+	#calcular el percentatge
+	poblacio_cat <- read.csv(system.file("extdata", "poblacio_cat.csv", package = "covidcatwatch"), sep = ";")
+	comarca_mask <- poblacio_cat$comarca == comarca
+	poblacio <- poblacio_cat[comarca_mask, "poblacio"]
+
+	plotdata$VACUNATS_DOSI_1 <- (plotdata$VACUNATS_DOSI_1/poblacio)*100
+
+
+	##IA14
+	#obtenir els casos confirmats agrupats per data
+  confirmats <- split(comarcagen2021$CASOS_CONFIRMAT, droplevels(comarcagen2021$DATA))
+  #sumar les dades de cada dia
+	confirmatssum <- lapply(confirmats, sum)
+	#afegir les dades al dataframe
+	plotdata$CONFIRMATS <- unlist(confirmatssum)
+
+	#calcular la IA14 per cada dia
+	dates21 <- as.Date(plotdata$DATA)
+
+	for (i in (1:nrow(plotdata))) {
+	  lastdate <- plotdata[i, "DATA"]
+	  last14mask <- dates21 >= (lastdate - 13) & dates21 <= lastdate
+	  last14 <- plotdata[last14mask, ]
+	  last14sum <- sum(last14$CONFIRMATS)
+	  ia14 <- as.numeric(sprintf("%.2f", (last14sum/poblacio)*100000))
+	  plotdata[i, "IA14"] <- ia14
+	}
+
+
+	for (i in (1:13)) {
+	  plotdata[i, "IA14"] <- NA
+	}
+
 
 	#crear el grafic
-	plot <- ggplot(vacunats1data, aes(x=DATA, y=VACUNATS_DOSI_1)) + geom_line(color="red")
-	title <- paste("Persones vacunades amb la 1a dosi al 2021", comarca, sep = "\n")
-	plot = plot + labs(title =  title, x= "Mesos", y= "Persones vacunades")
-	plot = plot + theme(plot.title = element_text(hjust = 0.5))
+	plot <- ggplot(plotdata, aes(x=DATA)) + geom_line(color="red", aes(y=VACUNATS_DOSI_1))
+	title <- paste("Dades 2021", comarca, sep = "\n")
+	plot = plot + labs(title =  title, x= "Mesos")
 	plot = plot + scale_x_date(labels = function(x) months[as.numeric(substr(x, 6, 7))])
 
+	#afegir ia14 + eix secundari
+	scaleFactor <- max(plotdata$VACUNATS_DOSI_1) / max(plotdata$IA14, na.rm = TRUE)
+	plot = plot + geom_line(color = "blue", aes(y=IA14 * scaleFactor))
+	plot = plot + scale_y_continuous(name="% Persones vacunades 1a dosi", sec.axis=sec_axis(~./scaleFactor, name="IA14"))
+	plot = plot + theme(
+	  plot.title = element_text(hjust = 0.5),
+	  axis.title.y.left=element_text(color="red"),
+	  axis.title.y.right=element_text(color="blue")
+	  )
 	print(plot)
 
 	#guardar el grafic
