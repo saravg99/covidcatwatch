@@ -44,7 +44,7 @@ make_tweet <- function(dataframe) {
 	casoslast7 <- sum(last7$CASOS_CONFIRMAT)
 	ia7 <- sprintf("%.2f", (casoslast7/poblacio)*100000)
 
-	#IA7
+	#IA14
 	last14mask <- dates >= (lastdate - 13) & dates <= lastdate
 	last14 <- comarcadiarigen[last14mask, ]
 	casoslast14 <- sum(last14$CASOS_CONFIRMAT)
