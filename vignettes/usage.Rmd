@@ -1,7 +1,7 @@
 ---
 title: "Ús del paquet covidcatwatch"
 author: "Sara Vega Abellaneda"
-date: "1/6/2021"
+date: "21/6/2021"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Usage of the package covidcatwatch}
@@ -47,25 +47,25 @@ tweet <- make_tweet(bllobregatdata)
 
 Un pas opcional és crear un gràfic amb aquestes dades amb la funció `plot_data` i emmagatzemar el *path* de la imatge en una variable. 
 
-```{r fig.height = 3, fig.width = 6}
+```{r fig.height = 3, fig.width = 6, warning=FALSE}
 plotfile <- plot_data(bllobregatdata, save = TRUE)
 
 ```
 
 
-Finalment, el resum i el gràfic es poden publicar en forma de tweet amb la funció `post_tweet`. Per a que això funcioni correctament, s'han d'emmagatzemar les claus de l'API de Twitter en un fitxer JSON de la següent manera:
+Finalment, el resum i el gràfic es poden publicar en forma de tweet amb la funció `post_tweet`. Per a que això funcioni correctament, s'han d'emmagatzemar les claus de l'API de Twitter com a *environmental variables*. Una opció per realitzar això és crear un fitxer `.Renviron` amb les seguents variables:
 
 
-```{json}
-{
-  "consumerKey": "XXXXXX",
-  "consumerSecret": "XXXXXX",
-  "accessToken": "XXXXXX",
-  "accessTokenSecret": "XXXXXX"
-}
+```{}
+  consumerKey = "XXXXXX"
+  consumerSecret = "XXXXXX"
+  accessToken = "XXXXXX"
+  accessTokenSecret = "XXXXXX"
 ```
 
-Una vegada s'ha cerat aquest fitxer ja es pot utilitzar la funció `post_tweet`. 
+A continuació, es pot fer que R llegeixi aquest fitxer amb la comanda `readRenviron(path)`.
+
+Una vegada s'han establert aquestes variables, ja es pot utilitzar la funció `post_tweet`. 
 
 
 ```{r eval=FALSE}
