@@ -1,6 +1,6 @@
 Package: covidcatwatch
 Title: Twitterbot dades covid catalunya
-Version: 0.99.7
+Version: 0.99.8
 Authors@R: 
     person(given = "Sara",
            family = "Vega",

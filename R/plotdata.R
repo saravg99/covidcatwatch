@@ -80,9 +80,9 @@ plot_data <- function(dataframe, save = FALSE) {
 	plot = plot + scale_x_date(labels = function(x) months[as.numeric(substr(x, 6, 7))])
 
 	#afegir ia14 + eix secundari
-	scaleFactor <- max(plotdata$VACUNATS_DOSI_1) / max(plotdata$IA14, na.rm = TRUE)
+	scaleFactor <- 100 / max(plotdata$IA14, na.rm = TRUE)
 	plot = plot + geom_line(color = "blue", aes(y=IA14 * scaleFactor))
-	plot = plot + scale_y_continuous(name="% Persones vacunades 1a dosi", sec.axis=sec_axis(~./scaleFactor, name="IA14"))
+	plot = plot + scale_y_continuous(name="% Persones vacunades 1a dosi", limits = c(0, 100),  sec.axis=sec_axis(~./scaleFactor, name="IA14"))
 	plot = plot + theme(
 	  plot.title = element_text(hjust = 0.5),
 	  axis.title.y.left=element_text(color="red"),
