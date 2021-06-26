@@ -1,6 +1,6 @@
-#' Crear un gr√†fic
+#' Crear un gr‡fic
 #'
-#' Crea un gr√†fic amb la quantitat acumulada de vacunats al llarg del 2021
+#' Crea un gr‡fic amb la quantitat acumulada de vacunats al llarg del 2021
 #' @param dataframe Dataframe amb les dades covid de la comarca corresponent
 #' @param save Si save = TRUE, es guarda el fitxer i es retorna el path del fitxer
 #' @return Si save = TRUE, retorna el path de la imatge guardada. Si no, nomes es visualitza el grafic en R studio
@@ -15,7 +15,7 @@
 
 
 plot_data <- function(dataframe, save = FALSE) {
-  months <- c("Gen.", "Febr.", "Mar√ß", "Abr.", "Maig", "Juny", "Jul.", "Agost", "Sept.", "Oct.", "Nov.", "Dec.")
+  months <- c("Gen.", "Febr.", "MarÁ", "Abr.", "Maig", "Juny", "Jul.", "Agost", "Sept.", "Oct.", "Nov.", "Dec.")
 
   options(scipen=999)
   DATA <- VACUNATS_DOSI_1 <- NULL
@@ -77,7 +77,7 @@ plot_data <- function(dataframe, save = FALSE) {
 	plot <- ggplot(plotdata, aes(x=DATA)) + geom_line(color="red", aes(y=VACUNATS_DOSI_1))
 	title <- paste("Dades 2021", comarca, sep = "\n")
 	plot = plot + labs(title =  title, x= "Mesos")
-	plot = plot + scale_x_date(labels = function(x) months[as.numeric(substr(x, 6, 7))])
+	plot = plot + scale_x_date(date_breaks="1 month",  labels = function(x) months[as.numeric(substr(x, 6, 7))])
 
 	#afegir ia14 + eix secundari
 	scaleFactor <- 100 / max(plotdata$IA14, na.rm = TRUE)
