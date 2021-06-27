@@ -15,7 +15,7 @@
 
 
 plot_data <- function(dataframe, save = FALSE) {
-  months <- c("Gen.", "Febr.", "Març", "Abr.", "Maig", "Juny", "Jul.", "Agost", "Sept.", "Oct.", "Nov.", "Dec.")
+  months <- c("Gen.", "Febr.", "Mar.", "Abr.", "Maig", "Juny", "Jul.", "Agost", "Sept.", "Oct.", "Nov.", "Dec.")
 
   options(scipen=999)
   DATA <- VACUNATS_DOSI_1 <- NULL
