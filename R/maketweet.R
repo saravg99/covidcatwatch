@@ -18,9 +18,9 @@ make_tweet <- function(dataframe) {
 
 	comarca <- as.character(comarcadiarigen[1, "NOM"])
 
-	poblacio_cat <- read.csv(system.file("extdata", "poblacio_cat.csv", package = "covidcatwatch"), sep = ";")
+	poblacio_cat <- read.csv(system.file("extdata", "poblacio_cat2020.csv", package = "covidcatwatch"), sep = ";")
 	comarca_mask <- poblacio_cat$comarca == comarca
-	poblacio <- poblacio_cat[comarca_mask, "poblacio"]
+	poblacio <- poblacio_cat[comarca_mask, "poblacio_total"]
 
 	##dades del ultim dia
 	lastdate <- Sys.Date() - 1

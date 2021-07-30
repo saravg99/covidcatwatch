@@ -40,9 +40,9 @@ plot_data <- function(dataframe, save = FALSE) {
 	#obtenir la suma acumulada
 	plotdata$VACUNATS_DOSI_1 <- cumsum(plotdata$VACUNATS_DOSI_1)
 	#calcular el percentatge
-	poblacio_cat <- read.csv(system.file("extdata", "poblacio_cat.csv", package = "covidcatwatch"), sep = ";")
+	poblacio_cat <- read.csv(system.file("extdata", "poblacio_cat2020.csv", package = "covidcatwatch"), sep = ";")
 	comarca_mask <- poblacio_cat$comarca == comarca
-	poblacio <- poblacio_cat[comarca_mask, "poblacio"]
+	poblacio <- poblacio_cat[comarca_mask, "poblacio_total"]
 
 	plotdata$VACUNATS_DOSI_1 <- (plotdata$VACUNATS_DOSI_1/poblacio)*100
 
