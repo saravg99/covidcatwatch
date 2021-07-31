@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotdata.R
 \name{plot_data}
 \alias{plot_data}
-\title{Crear un gràfic}
+\title{Crear un grafic}
 \usage{
 plot_data(dataframe, save = FALSE)
 }
@@ -15,7 +15,7 @@ plot_data(dataframe, save = FALSE)
 Si save = TRUE, retorna el path de la imatge guardada. Si no, nomes es visualitza el grafic en R studio
 }
 \description{
-Crea un gràfic amb la quantitat acumulada de vacunats al llarg del 2021
+Crea un grafic amb la quantitat acumulada de vacunats al llarg del 2021
 }
 \examples{
 \dontshow{

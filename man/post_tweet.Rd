@@ -4,14 +4,10 @@
 \alias{post_tweet}
 \title{Publicar un tweet}
 \usage{
-post_tweet(tweet, keysfile = "accesskeys.json", image = NULL)
+post_tweet(tweet, image = NULL)
 }
 \arguments{
 \item{tweet}{text que publicar}
-
-\item{keysfile}{Fitxer JSON que contingui les variables:
-consumerKey, consumerSecret, accessToken, accessTokenSecret.
-El nom del fitxer per defecte es "accesskeys.json"}
 
 \item{image}{fitxer de la imatge que es vol incloure}
 }
@@ -22,6 +18,5 @@ Publica un tweet
 \dontrun{
 post_tweet("Hello")
 post_tweet("Hello", image = "image.png")
-post_tweet("Hello", keysfile = "keys.json")
 }
 }
