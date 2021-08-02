@@ -104,7 +104,7 @@ plot_data <- function(dataframe, save = FALSE) {
 	comarca_age2 <- comarcagen2021[age2mask, ]
 	age3mask <- (comarcagen2021$GRUP_EDAT == "40 a 49") | (comarcagen2021$GRUP_EDAT == "50 a 59") | (comarcagen2021$GRUP_EDAT == "60 a 69")
 	comarca_age3 <- comarcagen2021[age3mask, ]
-	age4mask <- (comarcagen2021$GRUP_EDAT == "70 a 79") | (comarcagen2021$GRUP_EDAT == "80 o més")
+	age4mask <- (comarcagen2021$GRUP_EDAT == "70 a 79") | (comarcagen2021$GRUP_EDAT == "80 o m\U00E9s")
 	comarca_age4 <- comarcagen2021[age4mask, ]
 
 	#agrupar per data
@@ -184,8 +184,9 @@ plot_data <- function(dataframe, save = FALSE) {
 	#guardar el grafic
 	if (save == TRUE) {
 	  filepath <- tempfile(pattern="plot", fileext = ".png")
-		png(filename = filepath, res = 200, height = 675, width = 2400 )
-		multiplot(plot1, plot2, cols=2)
+		#png(filename = filepath, res = 400, height = 2700, width = 2400)
+	  png(filename = filepath, res = 200, height = 1350, width = 1200, type = "cairo")
+		multiplot(plot1, plot2, cols=1)
 	  dev.off()
 		return(filepath)
 	}
