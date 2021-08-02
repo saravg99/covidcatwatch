@@ -11,7 +11,6 @@
 #' plot_data(bllobregatdata)
 #' plotfile <- plot_data(bllobregatdata, save = TRUE)
 #' @import ggplot2
-#' @importFrom Rmisc multiplot
 #' @importFrom grDevices dev.off png
 #' @export
 
