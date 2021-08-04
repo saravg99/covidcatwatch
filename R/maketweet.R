@@ -23,7 +23,7 @@ make_tweet <- function(dataframe) {
 	poblacio <- poblacio_cat[comarca_mask, "poblacio_total"]
 
 	##dades del ultim dia
-	lastdate <- Sys.Date() - 1
+	lastdate <- as.Date(comarcadiarigen[1, "DATA"])
 	dates <- as.Date(comarcadiarigen$DATA)
 	datemask <- dates == lastdate
 	comarcagendia <- comarcadiarigen[datemask, ]
